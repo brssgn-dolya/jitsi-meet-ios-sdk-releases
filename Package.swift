@@ -23,7 +23,7 @@ let package = Package(
             name: "JitsiMeetSDKWrapper",
             dependencies: [
                 .target(name: "JitsiMeetSDK"),
-                .product(name: "WebRTC", package: "webrtc"),
+                .product(name: "WebRTC", package: "sonata-webrtc"),
                 .product(name: "GiphyUISDK", package: "giphy-ios-sdk")
             ],
             path: "Sources"
