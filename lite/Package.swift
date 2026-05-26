@@ -11,17 +11,22 @@ let package = Package(
             targets: ["JitsiMeetSDKWrapper"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/jitsi/webrtc", branch: "M124")
+        .package(url: "https://github.com/jitsi/webrtc", from: "124.0.0")
     ],
     targets: [
         .binaryTarget(
             name: "JitsiMeetSDK",
             path: "../lite/Frameworks/JitsiMeetSDK.xcframework"
         ),
+        .binaryTarget(
+            name: "hermes",
+            path: "../lite/Frameworks/hermes.xcframework"
+        ),
         .target(
             name: "JitsiMeetSDKWrapper",
             dependencies: [
                 .target(name: "JitsiMeetSDK"),
+                .target(name: "hermes"),
                 .product(name: "WebRTC", package: "webrtc")
             ],
             path: "Sources"

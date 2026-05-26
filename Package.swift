@@ -11,7 +11,7 @@ let package = Package(
             targets: ["JitsiMeetSDKWrapper"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/brssgn-dolya/sonata-webrtc", branch: "main"),
+        .package(url: "https://github.com/jitsi/webrtc", from: "124.0.0"),
         .package(url: "https://github.com/Giphy/giphy-ios-sdk", from: "2.2.12")
     ],
     targets: [
@@ -19,11 +19,16 @@ let package = Package(
             name: "JitsiMeetSDK",
             path: "Frameworks/JitsiMeetSDK.xcframework"
         ),
+        .binaryTarget(
+            name: "hermes",
+            path: "Frameworks/hermes.xcframework"
+        ),
         .target(
             name: "JitsiMeetSDKWrapper",
             dependencies: [
                 .target(name: "JitsiMeetSDK"),
-                .product(name: "WebRTC", package: "sonata-webrtc"),
+                .target(name: "hermes"),
+                .product(name: "WebRTC", package: "webrtc"),
                 .product(name: "GiphyUISDK", package: "giphy-ios-sdk")
             ],
             path: "Sources"
